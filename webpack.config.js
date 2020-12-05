@@ -7,6 +7,9 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'build')
     },
+    optimization: {
+        minimize: false
+    },
     module: {
         rules: [
             {
