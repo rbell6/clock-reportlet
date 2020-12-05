@@ -1,19 +1,15 @@
-import React, { useEffect, useState } from "react";
-//import { render } from "react-dom";
 
-function App() {
-    const [date, setDate] = useState(new Date());
-    useEffect(() => {
-        const id = setInterval(() => {
-            setDate(new Date());
+class ClockReportlet extends HTMLDivElement {
+    constructor(...args) {
+        const self = super(...args);
+
+        setInterval(() => {
+            const date = new Date();
+            self.textContent = date.toDateString() + ' ' + date.toTimeString();
         }, 1000);
-        return () => {
-            clearInterval(id);
-        };
-    }, []);
-    return <div>{date.toDateString() + ' ' + date.toTimeString()}</div>;
+
+        return self;
+    }
 }
 
-// render(<App />, document.getElementById("root"));
-
-window.customReportlets = {...window.customReportlets, ClockReportlet: App}
+window.customElements.define('clock-reportlet', ClockReportlet, { extends: 'div' });
